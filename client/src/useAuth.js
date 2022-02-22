@@ -25,6 +25,10 @@ export default function useAuth(code) {
             })
     }, [code])
 
+    useEffect(() => {
+
+    }, [refreshToken, expiresIn])
+
     return accessToken
 
 }
