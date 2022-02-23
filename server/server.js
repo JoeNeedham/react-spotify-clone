@@ -16,12 +16,17 @@ app.post('/refresh', (req, res) => {
         refreshToken
     })
 
-    spotifyWebApi.refreshAccessToken().then(
-        (data) => {
-            console.log(data.body);
+    spotifyWebApi
+    .refreshAccessToken()
+    .then(data => {
+            res.json({
+                accessToken: data.body.access_token,
+                expiresIn: data.body.expires_in
+            })
             // Save the access token so that it's used in future calls
             spotifyWebApi.setAccessToken(data.body['access_token']);
-        }). catch(() => {
+        }). catch(err => {
+            console.log(err)
             res.sendStatus(400)
         })
 })
